@@ -26,26 +26,9 @@ export default class Team {
     ];
   }
 
-  [Symbol.iterator]() {
-    return this;
-  }
-
-  next() {
-    if (this.current === undefined) {
-      // инициализация состояния итерации
-      this.current = 0;
+  * [Symbol.iterator]() {
+    for (let i = 0; i < this.teams.length; i += 1) {
+      yield this.teams[i];
     }
-    if (this.current < this.teams.length) {
-      this.current += 1;
-      return {
-        done: false,
-        value: this.teams[this.current - 1],
-      };
-    }
-    // очистка текущей итерации
-    delete this.current;
-    return {
-      done: true,
-    };
   }
 }
